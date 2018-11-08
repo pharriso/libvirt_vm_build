@@ -1,0 +1,35 @@
+- name: Copy source qcow image to temp directory
+  copy:
+    src: "{{ source_image }}"
+    dest: /tmp/{{ template_name }}
+    remote_src: yes
+
+- name: Set root password
+  shell: virt-customize -a /tmp/{{ template_name }} --root-password password:{{ root_password }}
+
+- name: Copy in eth0 network file
+  shell: virt-customize -a /tmp/{{ template_name }} --copy-in files/ifcfg-eth0:/etc/sysconfig/network-scripts
+
+- name: Remove cloud-init
+  shell: virt-customize -a /tmp/{{ template_name }} --uninstall cloud-init
+
+- name: Register to CDN
+  shell: virt-customize -a /tmp/{{ template_name }} --run-command 'subscription-manager register --org {{ rhsm_org }} --activationkey={{ rhsm_key }}'
+
+- name: Enable rhel-7-server-rpms and update
+  shell: virt-customize -a /tmp/{{ template_name }} --run-command 'subscription-manager repos --enable rhel-7-server-rpms && yum -y update'
+
+- name: Unregister from CDN
+  shell: virt-customize -a /tmp/{{ template_name }} --run-command 'subscription-manager unregister && subscription-manager clean'
+
+- name: Copy patched qcow to /var/lib/libvirt/images
+  copy:
+    src: /tmp/{{ template_name }}
+    dest: /var/lib/libvirt/images/{{ template_name }}
+    remote_src: yes
+
+- name: Remove temporary qcow
+  file:
+    path: /tmp/{{ template_name }}
+    state: absent
+

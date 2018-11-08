@@ -1,0 +1,21 @@
+---
+
+- name: Set hostname
+  hostname:
+    name: "{{ inventory_hostname }}"
+
+- name: Subscribe to CDN
+  redhat_subscription:
+    state: present
+    activationkey: "{{ rhsm_key }}"
+    org_id: "{{ rhsm_org }}"
+
+- name: Disable all RHSM repositories
+  rhsm_repository:
+    name: '*'
+    state: disabled
+
+- name: Enable rhel-7-server-rpms
+  rhsm_repository:
+    name: rhel-7-server-rpms
+    state: enabled

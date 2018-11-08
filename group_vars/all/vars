@@ -1,0 +1,5 @@
+source_image: /root/rhel-server-7.6-x86_64-kvm.qcow2
+template_name: rhel7_template.qcow2
+root_password: "{{ vault_root_password }}"
+rhsm_org: "{{ vault_rhsm_org }}"
+rhsm_key: "{{ vault_rhsm_key }}"

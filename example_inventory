@@ -1,0 +1,5 @@
+[web]
+web1.example.com ansible_host=192.168.122.10
+
+[example]
+someserver.example.com ansible_host=192.168.122.11 vcpus=2 memory=4 disks='[{"disk_name": "disk2", "disk_size": "50"}]'
