@@ -11,6 +11,10 @@
     creates: /var/lib/libvirt/images/{{ inventory_hostname }}.qcow2
   register: create_vm
 
+- name: Resize root disk
+  shell: qemu-img resize /var/lib/libvirt/images/{{ inventory_hostname }}.qcow2 +{{ root_expand_size }}G
+  when: create_vm is changed
+
 - name: Create additional disks if needed
   command: qemu-img create -f qcow2 -o preallocation=metadata /var/lib/libvirt/images/{{ inventory_hostname }}-{{ item.disk_name }}.qcow2 {{ item.disk_size }}G
   args:

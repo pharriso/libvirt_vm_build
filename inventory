@@ -1,0 +1,2 @@
+[tower]
+tower.example.com ansible_host=192.168.122.15 vcpu=2 memory=6

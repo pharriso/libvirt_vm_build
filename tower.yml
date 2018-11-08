@@ -1,0 +1,15 @@
+---
+
+- name: Create RHEL7 VM from template
+  hosts: tower
+  connection: local
+  gather_facts: false
+  roles:
+    - create_vm
+
+- name: Connect to VM and configure
+  hosts: tower
+  roles:
+    - common
+#    - automate-tower
+
