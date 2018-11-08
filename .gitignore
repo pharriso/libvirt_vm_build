@@ -1,1 +1,5 @@
 group_vars/all/vault
+roles/*
+!roles/common
+!roles/create_vm
+!roles/vm_template
