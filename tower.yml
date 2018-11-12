@@ -11,5 +11,5 @@
   hosts: tower
   roles:
     - common
-#    - automate-tower
-
+    - automate-tower
+    - tower-insights
