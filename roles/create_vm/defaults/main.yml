@@ -1,3 +1,4 @@
 cpu_cores: 1 
 memory: 1
 root_expand_size: 20
+template_name: rhel7_template.qcow2
