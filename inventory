@@ -1,2 +1,13 @@
 [tower]
 tower.example.com ansible_host=192.168.122.15 vcpu=2 memory=6
+
+[webservers]
+web1.example.com ansible_host=192.168.122.20 vcpu=1 memory=1
+web2.example.com ansible_host=192.168.122.21 vcpu=1 memory=1
+
+[haproxy]
+haproxy.example.com ansible_host=192.168.122.22 vcpu=1 memory=1
+
+[ansible-demo:children]
+webservers
+haproxy

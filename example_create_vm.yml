@@ -1,14 +1,14 @@
 ---
 
 - name: Create RHEL7 VM from template
-  hosts: web
+  hosts: ansible-demo
   connection: local
   gather_facts: false
   roles:
     - create_vm
 
 - name: Connect to VM and configure
-  hosts: web
+  hosts: ansible-demo
   roles:
     - common
 
