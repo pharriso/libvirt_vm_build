@@ -1,0 +1,14 @@
+---
+
+- name: Create RHEL7 VM from template
+  hosts: rhv-gluster
+  connection: local
+  gather_facts: false
+  roles:
+    - create_vm
+
+- name: Connect to VM and configure
+  hosts: rhv-gluster
+  roles:
+    - common
+    - rhv-gluster

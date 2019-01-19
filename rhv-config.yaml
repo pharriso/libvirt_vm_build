@@ -1,0 +1,6 @@
+---
+
+- name: Configure RHV Environment
+  hosts: rhv-h
+  roles:
+    - rhv-config

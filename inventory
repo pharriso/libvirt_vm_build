@@ -11,3 +11,18 @@ haproxy.example.com ansible_host=192.168.122.22 vcpu=1 memory=1
 [ansible-demo:children]
 webservers
 haproxy
+
+[ansible-tower]
+ansible-tower.example.com ansible_host=192.168.122.23 vcpu=2 memory=6
+
+[rhv-m]
+rhvm-primary.example.com ansible_host=192.168.122.24 vcpu=2 memory=4
+rhvm-secondary.example.com ansible_host=192.168.122.25 vcpu=2 memory=4
+
+[rhv-h]
+rhvh-primary.example.com ansible_host=192.168.122.26 vcpu=2 memory=4 rhv_manager=rhvm-primary.example.com
+rhvh-secondary.example.com ansible_host=192.168.122.29 vcpu=2 memory=4 rhv_manager=rhvm-secondary.example.com
+
+[rhv-gluster]
+gluster-primary.example.com ansible_host=192.168.122.27 vcpu=2 memory=2
+gluster-secondary.example.com ansible_host=192.168.122.28 vcpu=2 memory=2 disks='[{"disk_name": "gluster", "disk_size": "20"}]'

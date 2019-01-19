@@ -1,0 +1,14 @@
+---
+
+- name: Create RHEL7 VM from template
+  hosts: rhv-h
+  connection: local
+  gather_facts: false
+  roles:
+    - create_vm
+
+- name: Connect to VM and configure
+  hosts: rhv-h
+  roles:
+    - common
+    - rhv-h
